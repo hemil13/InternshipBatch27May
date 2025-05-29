@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">InternshipBatch27May</string>
+    <string name="login">Login Here</string>
+    <string name="welcome">Welcome You have \nbeen Missed!</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="create_new_account">Create New Account></string>
+    <string name="login_button">Login</string>
+
+</resources>
