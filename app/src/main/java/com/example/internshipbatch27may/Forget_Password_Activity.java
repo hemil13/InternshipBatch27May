@@ -1,6 +1,7 @@
 package com.example.internshipbatch27may;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +21,15 @@ public class Forget_Password_Activity extends AppCompatActivity {
 
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        
+
+
+
         email = findViewById(R.id.forget_email);
         new_password = findViewById(R.id.forget_password);
         new_confirm_password = findViewById(R.id.forget_confirm_password);
