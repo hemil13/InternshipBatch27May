@@ -40,15 +40,45 @@
             android:drawablePadding="@dimen/_5sdp"
             />
 
-        <EditText
-            android:id="@+id/main_password"
-            style="@style/edittext"
-            android:inputType="textPassword"
-            android:hint="@string/password"
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:drawableLeft="@drawable/ic_lock"
-            android:drawablePadding="@dimen/_5sdp"
-            />
+            >
+
+            <EditText
+                android:id="@+id/main_password"
+                style="@style/edittext"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="@dimen/_5sdp"
+                />
+
+
+            <ImageView
+                android:id="@+id/main_showIV"
+                android:layout_width="25sp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="@dimen/_28sdp"
+                android:visibility="gone"
+                android:src="@drawable/show"/>
+
+
+            <ImageView
+                android:id="@+id/main_hideIV"
+                android:layout_width="25sp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="@dimen/_28sdp"
+                android:visibility="visible"
+                android:src="@drawable/invisible"/>
+
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/main_forget_password"

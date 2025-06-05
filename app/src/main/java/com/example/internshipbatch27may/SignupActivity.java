@@ -74,8 +74,6 @@ public class SignupActivity extends AppCompatActivity {
                     String insertQuery = "INSERT INTO user VALUES(NULL, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"')";
                     db.execSQL(insertQuery);
 
-
-
                     Toast.makeText(SignupActivity.this, "Account Created Successfull", Toast.LENGTH_SHORT).show();
 //                    Snackbar.make(view, "LOgin Successfull", Snackbar.LENGTH_LONG).show();
                     Intent intent = new Intent(SignupActivity.this, MainActivity.class);
