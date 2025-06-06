@@ -13,13 +13,14 @@
         android:theme="@style/Theme.InternshipBatch27May"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Forget_Password_Activity"
             android:exported="false" />
         <activity
             android:name=".SignupActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
