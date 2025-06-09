@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DashboardActivity">
 
     <Button
@@ -14,6 +15,16 @@
         android:layout_marginTop="@dimen/_70sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:text="Profile"
+        />
+
+
+    <Button
+        android:id="@+id/dashboard_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Logout"
         />
 
 </LinearLayout>
