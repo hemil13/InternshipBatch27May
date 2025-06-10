@@ -81,6 +81,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 } else{
 
+
+
+
+
                     String updateQuery = "UPDATE user SET name = '"+name.getText().toString()+"', email = '"+email.getText().toString()+"', contact = '"+contact.getText().toString()+"', password = '"+password.getText().toString()+"' WHERE userid = '"+sp.getString(ConstantSp.userid,"")+"'";
                     db.execSQL(updateQuery);
 

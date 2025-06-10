@@ -1,6 +1,7 @@
 package com.example.internshipbatch27may;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,8 @@ public class Forget_Password_Activity extends AppCompatActivity {
 
     String email_pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
+    SQLiteDatabase db;
+
 
 
     @Override
@@ -28,7 +31,9 @@ public class Forget_Password_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-
+        db  = openOrCreateDatabase("InternshipBatch27May.db", MODE_PRIVATE, null);
+        String userTable = "CREATE TABLE IF NOT EXISTS user(userid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50), email VARCHAR(100), contact VARCHAR(10), password VARCHAR(20))";
+        db.execSQL(userTable);
 
         email = findViewById(R.id.forget_email);
         new_password = findViewById(R.id.forget_password);
@@ -51,9 +56,17 @@ public class Forget_Password_Activity extends AppCompatActivity {
                 } else if (!new_confirm_password.getText().toString().matches(new_password.getText().toString())) {
                     new_confirm_password.setError("Confirm password Does not matches ");
                 } else {
-                    Toast.makeText(Forget_Password_Activity.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Forget_Password_Activity.this, MainActivity.class);
-                    startActivity(intent);
+                    String checkEmail = "SELECT * FROM user WHERE email = '"+email.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(checkEmail,null);
+                    if(cursor.getCount()>0){
+                        String updatePassword = "UPDATE user SET password = '"+new_password.getText().toString()+"' WHERE email = '"+email.getText().toString()+"'";
+                        db.execSQL(updatePassword);
+                        Toast.makeText(Forget_Password_Activity.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                    }
+                    else {
+                        Toast.makeText(Forget_Password_Activity.this,"Email Doesn't Exists", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

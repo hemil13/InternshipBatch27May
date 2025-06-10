@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class DashboardActivity extends AppCompatActivity {
-    Button profile, logout;
+    Button profile, logout, category;
 
     SharedPreferences sp;
 
@@ -26,6 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         profile = findViewById(R.id.dashboard_profile);
         logout = findViewById(R.id.dashboard_logout);
+        category = findViewById(R.id.dashboard_category);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,15 @@ public class DashboardActivity extends AppCompatActivity {
                 sp.edit().clear().commit();
 
                 Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, CategoryActivity.class);
                 startActivity(intent);
             }
         });
