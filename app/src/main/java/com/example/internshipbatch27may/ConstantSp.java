@@ -11,4 +11,6 @@ public class ConstantSp {
     public static final String password = "PASSWORD";
 
     public static final String userid = "USERID";
+
+    public static final String categoryid = "CATEGORYID";
 }

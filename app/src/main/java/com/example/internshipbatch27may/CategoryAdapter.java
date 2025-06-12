@@ -1,6 +1,10 @@
 package com.example.internshipbatch27may;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHolder>  {
 
     Context context;
@@ -17,12 +23,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
     String[] nameArray;
     int[] imageArray;
 
-    public CategoryAdapter(Context context, int[] idArray, String[] nameArray, int[] imageArray) {
+    ArrayList<CategoryList> arrayList;
+
+    SharedPreferences sp;
+
+
+//    public CategoryAdapter(Context context, int[] idArray, String[] nameArray, int[] imageArray) {
+//        this.context = context;
+//        this.idArray = idArray;
+//        this.nameArray = nameArray;
+//        this.imageArray = imageArray;
+//    }
+
+
+    public CategoryAdapter(Context context, ArrayList<CategoryList> arrayList){
         this.context = context;
-        this.idArray = idArray;
-        this.nameArray = nameArray;
-        this.imageArray = imageArray;
+        this.arrayList = arrayList;
+        sp = context.getSharedPreferences(ConstantSp.pref, MODE_PRIVATE);
     }
+
 
     @NonNull
     @Override
@@ -47,13 +66,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyHolder holder, int position) {
-        holder.category_image.setImageResource(imageArray[position]);
-        holder.category_text.setText(nameArray[position]);
+        holder.category_image.setImageResource(arrayList.get(position).getImage());
+        holder.category_text.setText(arrayList.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                sp.edit().putString(ConstantSp.categoryid, String.valueOf(arrayList.get(position).getId()));
+                Intent intent = new Intent(context, SubcategoryActivity.class);
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return nameArray.length;
+        return arrayList.size();
     }
 
 }
