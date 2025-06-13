@@ -86,8 +86,6 @@ public class CategoryActivity extends AppCompatActivity {
                 list.setImage(cursor.getInt(2));
                 arrayList.add(list);
             }
-
-
             CategoryAdapter adapter = new CategoryAdapter(CategoryActivity.this, arrayList);
             category_recycler.setAdapter(adapter);
         }
