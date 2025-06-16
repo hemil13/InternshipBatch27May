@@ -51,8 +51,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
     public void onBindViewHolder(@NonNull ProductAdapter.MyHolder holder, int position) {
         holder.product_image.setImageResource(arrayList.get(position).getProductImage());
         holder.product_name.setText(arrayList.get(position).getProductName());
-        holder.product_price.setText(sp.getString(ConstantSp.ruppees, "") + arrayList.get(position).getProductPrice());
-
+        holder.product_price.setText(ConstantSp.ruppees + arrayList.get(position).getProductPrice());
     }
 
     @Override
