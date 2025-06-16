@@ -75,7 +75,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
                 sp.edit().putString(ConstantSp.categoryid, String.valueOf(arrayList.get(position).getId())).commit();
                 Intent intent = new Intent(context, SubcategoryActivity.class);
                 context.startActivity(intent);
-
             }
         });
     }

@@ -3,6 +3,7 @@ package com.example.internshipbatch27may;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,15 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(@NonNull SubCategoryAdapter.MyHolder holder, int position) {
         holder.category_image.setImageResource(arrayList.get(position).getImage());
         holder.category_text.setText(arrayList.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString(ConstantSp.subcategoryid, String.valueOf(arrayList.get(position).getSubcategoryid())).commit();
+                Intent intent = new Intent(context, ProductActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

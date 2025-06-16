@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +21,8 @@ public class SubcategoryActivity extends AppCompatActivity {
 
     RecyclerView subcategory_recycler;
 
-    int[] subcategoryid = {1,2,3,4,5,6};
     int[] categoryid = {2,2,2,3,3,3};
+    int[] subcategoryid = {1,2,3,4,5,6};
     String[] nameArray = {"Jeans", "Shirt", "Tshirt", "Mobile", "Headphones", "Earbuds"};
     int[] imageArray = {R.drawable.jeans, R.drawable.shirt, R.drawable.thsirt,
             R.drawable.mobile, R.drawable.headphone, R.drawable.earbuds};
@@ -57,6 +58,7 @@ public class SubcategoryActivity extends AppCompatActivity {
 
         subcategory_recycler = findViewById(R.id.subcategory_recycler);
         subcategory_recycler.setLayoutManager(new LinearLayoutManager(SubcategoryActivity.this));
+        subcategory_recycler.setItemAnimator(new DefaultItemAnimator());
 
 
         for(int i =0; i<categoryid.length; i++){
