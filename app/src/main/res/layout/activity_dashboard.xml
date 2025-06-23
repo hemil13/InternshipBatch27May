@@ -8,11 +8,20 @@
     android:orientation="vertical"
     tools:context=".DashboardActivity">
 
+    <TextView
+        android:id="@+id/dashboard_welcome"
+        style="@style/text_25"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:text="Welcome user"
+        android:gravity="center"
+        />
+
     <Button
         android:id="@+id/dashboard_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:text="Profile"
         />
@@ -33,6 +42,16 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:text="Category"
+        />
+
+
+    <Button
+        android:id="@+id/dashboard_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Delete Profile"
         />
 
 </LinearLayout>
