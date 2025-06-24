@@ -3,6 +3,7 @@ package com.example.internshipbatch27may;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        ImageView product_image;
+        ImageView product_image, product_wishlist;
         TextView product_name, product_price;
 
         public MyHolder(@NonNull View itemView) {
@@ -44,6 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
             product_image = itemView.findViewById(R.id.product_image);
             product_name = itemView.findViewById(R.id.product_name);
             product_price = itemView.findViewById(R.id.product_price);
+            product_wishlist = itemView.findViewById(R.id.product_wishlist);
         }
     }
 
@@ -52,6 +54,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
         holder.product_image.setImageResource(arrayList.get(position).getProductImage());
         holder.product_name.setText(arrayList.get(position).getProductName());
         holder.product_price.setText(ConstantSp.ruppees + arrayList.get(position).getProductPrice());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString(ConstantSp.product_name, arrayList.get(position).getProductName()).commit();
+                sp.edit().putString(ConstantSp.product_price, String.valueOf(arrayList.get(position).getProductPrice())).commit();
+                sp.edit().putString(ConstantSp.product_description, arrayList.get(position).getProductDescription()).commit();
+                sp.edit().putInt(ConstantSp.product_image, arrayList.get(position).getProductImage()).commit();
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+
+        holder.product_wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.product_wishlist.setImageResource(R.drawable.wishlist_fill);
+            }
+        });
+
     }
 
     @Override
