@@ -27,7 +27,7 @@ public class ProductActivity extends AppCompatActivity {
 
     int[] productPrice = {10000, 20000, 30000, 40000, 50000, 60000};
     String[] productDesc = {"Redmi Description", "Oneplus Description", "Sony Description",
-            "Airpods Max Description", "Sony Headphones Description",
+            "Airpods Max Description ofhgyg headpones jbdfjknsdkfns", "Sony Headphones Description",
             "Noise Headphones Description"};
 
 
@@ -58,6 +58,9 @@ public class ProductActivity extends AppCompatActivity {
 
         String productTable = "CREATE TABLE IF NOT EXISTS product(productId INTEGER PRIMARY KEY AUTOINCREMENT, subcategoryid INTEGER, productName VARCHAR(50), productImage INTEGER, productPrice INTEGER, productDescription VARCHAR(100))";
         db.execSQL(productTable);
+
+        String wishlistTable = "CREATE TABLE IF NOT EXISTS wishlist(wishlistId INTEGER PRIMARY KEY AUTOINCREMENT, productId INTEGER, userId INTEGER)";
+        db.execSQL(wishlistTable);
 
 
 
@@ -91,6 +94,17 @@ public class ProductActivity extends AppCompatActivity {
                 list.setProductImage(cursor.getInt(3));
                 list.setProductPrice(cursor.getInt(4));
                 list.setProductDescription(cursor.getString(5));
+
+                String wishlistCheck = "SELECT * FROM wishlist WHERE productId = '"+list.getProductId()+"' AND userid = '"+sp.getString(ConstantSp.userid, "")+"'";
+                Cursor wishlistCursor = db.rawQuery(wishlistCheck,null);
+
+                if(wishlistCursor.getCount()>0){
+                    list.setWishList(true);
+                }
+                else {
+                    list.setWishList(false);
+                }
+
                 arraylist.add(list);
             }
             ProductAdapter adapter = new ProductAdapter (ProductActivity.this, arraylist);

@@ -55,13 +55,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder
         holder.product_name.setText(arrayList.get(position).getProductName());
         holder.product_price.setText(ConstantSp.ruppees + arrayList.get(position).getProductPrice());
 
+        if(arrayList.get(position).isWishList()){
+            holder.product_wishlist.setImageResource(R.drawable.wishlist_fill);
+        }
+        else{
+            holder.product_wishlist.setImageResource(R.drawable.wishlist_empty);
+        }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp.edit().putString(ConstantSp.product_id, String.valueOf(arrayList.get(position).getProductId())).commit();
                 sp.edit().putString(ConstantSp.product_name, arrayList.get(position).getProductName()).commit();
                 sp.edit().putString(ConstantSp.product_price, String.valueOf(arrayList.get(position).getProductPrice())).commit();
                 sp.edit().putString(ConstantSp.product_description, arrayList.get(position).getProductDescription()).commit();
                 sp.edit().putInt(ConstantSp.product_image, arrayList.get(position).getProductImage()).commit();
+                sp.edit().putBoolean(ConstantSp.isWishlist, arrayList.get(position).isWishList()).commit();
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 context.startActivity(intent);
             }

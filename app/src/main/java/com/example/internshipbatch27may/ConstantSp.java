@@ -18,9 +18,13 @@ public class ConstantSp {
 
     public static final String ruppees = "₹";
 
+    public static final String product_id = "PRODUCTID";
+
     public static final String product_name = "PRODUCTNAME";
     public static final String product_price = "PRODUCTPRICE";
     public static final String product_description = "PRODUCTDESCRIPTION";
     public static final String product_image = "PRODUCTIMAGE";
+
+    public static final String isWishlist = "ISWISHLIST";
 
 }

@@ -38,10 +38,32 @@
     <TextView
         android:id="@+id/product_detail_desc"
         android:layout_width="match_parent"
+        android:justificationMode="inter_character"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:textSize="@dimen/_25sdp"
         />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/product_detail_wishlist"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="39dp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/wishlist_empty" />
+        
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/cart"
+            />
+        
+    </LinearLayout>
 
 </LinearLayout>

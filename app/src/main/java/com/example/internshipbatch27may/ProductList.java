@@ -1,6 +1,17 @@
 package com.example.internshipbatch27may;
 
 public class ProductList {
+
+    int productId, subcategoryId, productImage, productPrice;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public int getProductId() {
         return productId;
     }
@@ -33,14 +44,6 @@ public class ProductList {
         this.productPrice = productPrice;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public String getProductDescription() {
         return productDescription;
     }
@@ -49,6 +52,15 @@ public class ProductList {
         this.productDescription = productDescription;
     }
 
-    int productId, subcategoryId, productImage, productPrice;
+    public boolean isWishList() {
+        return isWishList;
+    }
+
+    public void setWishList(boolean wishList) {
+        isWishList = wishList;
+    }
+
     String productName, productDescription;
+
+    boolean isWishList;
 }
