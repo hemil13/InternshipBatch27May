@@ -1,11 +1,14 @@
 package com.example.internshipbatch27may;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,10 +19,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ProductDetailActivity extends AppCompatActivity {
+import com.razorpay.Checkout;
+import com.razorpay.PaymentData;
+import com.razorpay.PaymentResultWithDataListener;
+
+import org.json.JSONObject;
+
+public class ProductDetailActivity extends AppCompatActivity implements PaymentResultWithDataListener {
 
     ImageView image, wishlist;
     TextView name, price, description;
+    Button payNow;
 
     SharedPreferences sp;
 
@@ -63,6 +73,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         price = findViewById(R.id.product_detail_price);
         description = findViewById(R.id.product_detail_desc);
         wishlist = findViewById(R.id.product_detail_wishlist);
+        payNow = findViewById(R.id.pay_now);
 
 
         image.setImageResource(sp.getInt(ConstantSp.product_image, 0));
@@ -104,16 +115,57 @@ public class ProductDetailActivity extends AppCompatActivity {
                 else {
                     String deleteQuery = "DELETE FROM wishlist WHERE productId = '"+sp.getString(ConstantSp.product_id, "")+"' AND userId = '"+sp.getString(ConstantSp.userid,"")+"'";
                     db.execSQL(deleteQuery);
-
                     wishlist.setImageResource(R.drawable.wishlist_empty);
-
                     Toast.makeText(ProductDetailActivity.this, "Removed From Wishlist", Toast.LENGTH_SHORT).show();
-
                     isWishlist  = false;
                 }
             }
         });
 
+        payNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPayment();
+            }
+        });
+    }
+
+    private void startPayment() {
+        final Activity activity = this;
+        Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_Uv78nQEIyzmear");
+
+        try {
+            JSONObject options = new JSONObject();
+            options.put("name", getResources().getString(R.string.app_name));
+            options.put("description", "Purchase Deal From " + getResources().getString(R.string.app_name));
+            options.put("send_sms_hash", true);
+            options.put("allow_rotation", true);
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image", R.mipmap.ic_launcher);
+            options.put("currency", "INR");
+            options.put("amount", String.valueOf(Integer.parseInt(sp.getString(ConstantSp.product_price,"")) * 100));
+
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", "khatrisagar2@gmail.com");
+            preFill.put("contact", "7878232386");
+            options.put("prefill", preFill);
+
+            checkout.open(activity, options);
+
+        } catch(Exception e) {
+            Log.e("RESPONSE", "Error in starting Razorpay Checkout", e);
+        }
+    }
+
+    @Override
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+        Toast.makeText(ProductDetailActivity.this, "Payment Success ", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+        Toast.makeText(ProductDetailActivity.this, "Payment Failed ", Toast.LENGTH_SHORT).show();
 
     }
 }
